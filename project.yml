@@ -1,0 +1,57 @@
+name: Wisp
+options:
+  bundleIdPrefix: com.praveenmsp
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "16.0"
+  groupSortPosition: top
+
+packages:
+  WispShared:
+    path: WispShared
+  supabase-swift:
+    url: https://github.com/supabase/supabase-swift.git
+    from: "2.0.0"
+
+configFiles:
+  Debug: Secrets.xcconfig
+  Release: Secrets.xcconfig
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    DEAD_CODE_STRIPPING: YES
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+    SWIFT_STRICT_CONCURRENCY: complete
+
+targets:
+  Wisp:
+    type: application
+    platform: iOS
+    sources:
+      - Wisp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.praveenmsp.wisp
+        INFOPLIST_FILE: Wisp/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Wisp/Resources/Wisp.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    dependencies:
+      - package: WispShared
+      - package: supabase-swift
+        product: Supabase
+      - target: WispWidget
+
+  WispWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - WispWidget
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.praveenmsp.wisp.widget
+        INFOPLIST_FILE: WispWidget/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: WispWidget/Resources/WispWidget.entitlements
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../../Frameworks"
+    dependencies:
+      - package: WispShared
