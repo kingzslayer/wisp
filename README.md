@@ -10,7 +10,6 @@ Ambient presence app for iOS — share your vibe with close friends via home scr
 - **Vibe sharing** — set an emoji, text, or photo status visible only to bonded friends
 - **Home screen widgets** — small and lock screen widgets that update in real time
 - **Social battery** — share how social you're feeling without saying a word
-- **Nudge** — tap a widget to send a quiet "thinking of you" signal
 - **Bonding** — connect with friends via QR code or shareable link
 - **Targeting** — choose which friends see each vibe
 
